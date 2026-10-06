@@ -1,0 +1,9 @@
+CREATE TABLE goal_contributions (
+    id          INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    user_id     INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    goal_id     INTEGER NOT NULL REFERENCES savings_goals(id) ON DELETE CASCADE,
+    account_id  INTEGER NOT NULL REFERENCES accounts(id) ON DELETE RESTRICT,
+    amount      NUMERIC(14,2) NOT NULL CHECK (amount > 0),
+    date        DATE NOT NULL DEFAULT CURRENT_DATE,
+    created_at  TIMESTAMPTZ NOT NULL DEFAULT now()
+);
